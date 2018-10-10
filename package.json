@@ -1,0 +1,25 @@
+{
+  "name": "node-reddit",
+  "version": "1.0.0",
+  "description": "A Reddit-like app for users to discuss and share content, built with Node and Express",
+  "author": "Carlos Santiago",
+  "license": "ISC",
+  "homepage": "https://github.com/csantiago132/node-reddit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csantiago132/node-reddit.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "reddit-clone",
+    "javascript"
+  ],
+  "bugs": {
+    "url": "https://github.com/csantiago132/node-reddit/issues"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  }
+}
