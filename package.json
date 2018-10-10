@@ -19,7 +19,8 @@
     "start": "node src/server.js",
     "eslint:js": "./node_modules/.bin/eslint */**/*.js  --ignore-pattern !.prettierrc --fix --quiet",
     "prettier-md": "prettier --config .prettierrc.json --use-tabs --print-width 80 --write **/*.md",
-    "prettier-json": "prettier --config  .prettierrc.json  --write *.json"
+    "prettier-json": "prettier --config  .prettierrc.json  --write *.json",
+    "prettier-js": "prettier --config  .prettierrc.json  --write *.js"
   },
   "husky": {
     "hooks": {
@@ -27,7 +28,7 @@
     }
   },
   "lint-staged": {
-    "*.js": ["yarn run eslint:js", "git add"],
+    "*.js": ["yarn run prettier-js", "yarn run eslint:js", "git add"],
     "*.json": ["yarn run prettier-json", "git add"],
     "*.md": ["yarn run prettier-md", "git add"]
   },
