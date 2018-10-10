@@ -8,4 +8,4 @@ tmp
 .sass-cache/
 stats.json
 .vscode/
-.prettierrc
+.prettierrc.json

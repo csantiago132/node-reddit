@@ -1,0 +1,28 @@
+{
+    "useTabs": false,   
+    "tabWidth": 2,
+    "printWidth": 80,
+    "parser": "babylon",
+    "semi": true,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "jsxBracketSameLine": false,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "overrides": [
+        {
+            "files": "*.md",
+            "options": {
+                "parser": "markdown",
+                "printWidth": 80,
+                "proseWrap": "always"
+            }
+        },
+        {
+            "files": "*.json",
+            "options": {
+                "parser": "json"
+            }
+        }
+    ]
+}
