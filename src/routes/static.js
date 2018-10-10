@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (reques, response) => {
+router.get('/', (request, response) => {
   response.send('Welcome to Node-Reddit');
 });
 
