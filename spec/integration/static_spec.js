@@ -11,13 +11,4 @@ describe('routes : static', () => {
       });
     });
   });
-
-  describe('GET /marco', () => {
-    it('should return polo', (done) => {
-      request.get(`${base}/marco`, (error, response, body) => {
-        expect(response.body).toBe('polo');
-        done();
-      });
-    });
-  });
 });
