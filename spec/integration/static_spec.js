@@ -43,7 +43,7 @@ describe('routes : static', () => {
 
     it(`should have 'About Us' in the body`, (done) => {
       request.get(`${base}/about`, (error, response, body) => {
-        expect(body).toContain('About Us');
+        expect(body).toContain(' About Us ');
         done();
       });
     });
