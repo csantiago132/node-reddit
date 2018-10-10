@@ -1,5 +1,5 @@
 module.exports = {
   index(request, response) {
-    response.send('Welcome to Node-Reddit');
+    response.render('static/index', { title: 'Welcome to Node-Reddit' });
   },
 };
