@@ -1,9 +1,8 @@
-const app = require("./app");
-const http = require("http");
+const app = require('./app');
+const http = require('http');
 const server = http.createServer(app);
+const serverPort = 5000;
 
-server.listen(5000);
-
-server.on("listening", () => {
-  console.log("server is listening for requests on port 5000");
+server.listen(serverPort, () => {
+  console.log(`Server listening on port ${serverPort}`);
 });
