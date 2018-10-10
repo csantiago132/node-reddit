@@ -15,12 +15,35 @@ describe('routes : static', () => {
         done();
       });
     });
+
+    it(`should have 'Welcome to Node-Reddit' in the body`, (done) => {
+      request.get(base, (error, response, body) => {
+        expect(body).toContain('Welcome to Node-Reddit');
+        done();
+      });
+    });
   });
 
   describe('GET /marco', () => {
     it('should return polo', (done) => {
       request.get(`${base}/marco`, (error, response, body) => {
         expect(response.body).toBe('polo');
+        done();
+      });
+    });
+  });
+
+  describe('GET /about', () => {
+    it('should return status code 200', (done) => {
+      request.get(`${base}/about`, (error, response, body) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
+    });
+
+    it(`should have 'About Us' in the body`, (done) => {
+      request.get(`${base}/about`, (error, response, body) => {
+        expect(body).toContain('About Us');
         done();
       });
     });

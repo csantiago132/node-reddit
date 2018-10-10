@@ -15,8 +15,8 @@
   },
   "main": "src/server.js",
   "scripts": {
-    "test": "export NODE_ENV=test && jasmine",
-    "start": "node src/server.js",
+    "test": "cross-env NODE_ENV=test && jasmine",
+    "start": "cross-env NODE_ENV=development && node src/server.js",
     "eslint:js": "./node_modules/.bin/eslint */**/*.js  --ignore-pattern !.prettierrc --fix --quiet",
     "prettier-md": "prettier --config .prettierrc.json --use-tabs --print-width 80 --write **/*.md",
     "prettier-json": "prettier --config  .prettierrc.json  --write *.json",
@@ -33,6 +33,8 @@
     "*.md": ["yarn run prettier-md", "git add"]
   },
   "dependencies": {
+    "cross-env": "^5.2.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.3"
   },
   "devDependencies": {
