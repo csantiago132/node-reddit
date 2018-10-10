@@ -29,7 +29,6 @@ describe('routes : topics', () => {
   });
 
   describe('GET /topics', () => {
-    //let sequelize;
     it('should return a status code 200', (done) => {
       request.get(base, (error, response, body) => {
         console.log(response.body);
