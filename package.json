@@ -9,24 +9,39 @@
     "type": "git",
     "url": "git+https://github.com/csantiago132/node-reddit.git"
   },
-  "keywords": [
-    "node",
-    "express",
-    "reddit-clone",
-    "javascript"
-  ],
+  "keywords": ["node", "express", "reddit-clone", "javascript"],
   "bugs": {
     "url": "https://github.com/csantiago132/node-reddit/issues"
   },
   "main": "src/server.js",
   "scripts": {
     "test": "export NODE_ENV=test && jasmine",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "eslint:js": "./node_modules/.bin/eslint */**/*.js  --ignore-pattern !.prettierrc --fix --quiet",
+    "prettier-md": "prettier --config .prettierrc.json --use-tabs --print-width 80 --write **/*.md",
+    "prettier-json": "prettier --config  .prettierrc.json  --write *.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": ["yarn run eslint:js", "git add"],
+    "*.json": ["yarn run prettier-json", "git add"],
+    "*.md": ["yarn run prettier-md", "git add"]
   },
   "dependencies": {
     "express": "^4.16.3"
   },
   "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "1.14.3",
+    "husky": "^1.1.0",
     "jasmine": "3.0.0",
     "request": "2.83.0"
   }
