@@ -1,0 +1,33 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.8.0
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    steps:
+      - checkout
+  
+      - run: 
+          name: Install Application
+          command: 'yarn install'
+
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+      - run: 
+          name: Run Jazmine tests
+          command: 'yarn run test'
+
