@@ -33,6 +33,7 @@
     "*.md": ["yarn run prettier-md", "git add"]
   },
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.3"
   },
   "devDependencies": {
