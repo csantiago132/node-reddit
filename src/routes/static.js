@@ -8,4 +8,8 @@ router.get('/marco', (request, response) => {
   response.send('polo');
 });
 
+router.get('/about', (request, response) => {
+  response.send('About Us');
+});
+
 module.exports = router;
