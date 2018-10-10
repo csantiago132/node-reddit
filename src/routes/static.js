@@ -1,9 +1,8 @@
 const express = require('express');
+const staticController = require('../controllers/staticController');
 const router = express.Router();
 
-router.get('/', (request, response) => {
-  response.send('Welcome to Node-Reddit');
-});
+router.get('/', staticController.index);
 
 router.get('/marco', (request, response) => {
   response.send('polo');
