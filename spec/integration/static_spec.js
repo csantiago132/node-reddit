@@ -15,6 +15,13 @@ describe('routes : static', () => {
         done();
       });
     });
+
+    it(`should have 'Welcome to Node-Reddit' in the body`, (done) => {
+      request.get(base, (error, response, body) => {
+        expect(body).toContain('Welcome to Node-Reddit');
+        done();
+      });
+    });
   });
 
   describe('GET /marco', () => {
