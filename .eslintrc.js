@@ -7,6 +7,7 @@ module.exports = {
     'prettier/standard',
   ],
   plugins: ['prettier'],
+  parser: 'babel-eslint',
   env: {
     node: true,
     es6: true,
