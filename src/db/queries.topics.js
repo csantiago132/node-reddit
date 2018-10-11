@@ -6,8 +6,8 @@ module.exports = {
       .then((topics) => {
         callback(null, topics);
       })
-      .catch((err) => {
-        callback(err);
+      .catch((error) => {
+        callback(error);
       });
   },
 };
