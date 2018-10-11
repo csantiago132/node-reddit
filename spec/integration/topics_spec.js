@@ -6,14 +6,14 @@ describe('routes : topics', () => {
     // start server for each test,
     // this makes test run the server indepent from the app.
     var server = require('../../src/server');
+    var Topic = require('../../src/db/models').Topics;
   });
 
   beforeEach((done) => {
     var sequelize = require('../../src/db/models/index').sequelize;
-    const Topics = require('../../src/db/models').Topics;
     this.topic;
     sequelize.sync({ force: true }).then((response) => {
-      Topics.create({
+      Topic.create({
         title: 'JS Frameworks',
         description: 'There is a lot of them',
       })
