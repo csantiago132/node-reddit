@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {},
   );
-  Banner.associate = function(models) {
+  Banner.associate = (models) => {
     // associations can be defined here
     Banner.belongsTo(models.Topics, {
       foreignKey: 'topicId',
