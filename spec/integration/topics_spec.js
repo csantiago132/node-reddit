@@ -1,6 +1,5 @@
 const request = require('request');
 const base = 'http://localhost:5000/topics';
-const Topic = require('../../src/db/models/topic').Topic;
 
 describe('routes : topics', () => {
   beforeAll(() => {
@@ -11,9 +10,10 @@ describe('routes : topics', () => {
 
   beforeEach((done) => {
     var sequelize = require('../../src/db/models/index').sequelize;
+    const Topics = require('../../src/db/models').Topics;
     this.topic;
-    sequelize.sync({ force: true }).then((res) => {
-      Topic.create({
+    sequelize.sync({ force: true }).then((response) => {
+      Topics.create({
         title: 'JS Frameworks',
         description: 'There is a lot of them',
       })
@@ -31,11 +31,10 @@ describe('routes : topics', () => {
   describe('GET /topics', () => {
     it('should return a status code 200', (done) => {
       request.get(base, (error, response, body) => {
-        console.log(response.body);
         expect(response.statusCode).toBe(200);
         expect(error).toBeNull();
-        // expect(body).toContain('Topics');
-        //expect(body).toContain('JS Frameworks');
+        expect(body).toContain('Topics');
+        expect(body).toContain('JS Frameworks');
         done();
       });
     });
