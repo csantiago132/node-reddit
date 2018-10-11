@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Banner = sequelize.define(
-    'Banners',
+    'Banner',
     {
       source: DataTypes.STRING,
       description: DataTypes.STRING,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Topics',
+          model: 'Topic',
           key: 'id',
           as: 'topicId',
         },
@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {},
   );
-  Banner.associate = (models) => {
+  Banner.associate = function(models) {
     // associations can be defined here
-    Banner.belongsTo(models.Topics, {
+    Banner.belongsTo(models.Topic, {
       foreignKey: 'topicId',
       onDelete: 'CASCADE',
     });

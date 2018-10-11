@@ -1,16 +1,12 @@
 const request = require('request');
+const server = require('../../src/server');
+const sequelize = require('../../src/db/models/index').sequelize;
+const Topic = require('../../src/db/models').Topic;
+
 const base = 'http://localhost:5000/topics';
 
 describe('routes : topics', () => {
-  beforeAll(() => {
-    // start server for each test,
-    // this makes test run the server indepent from the app.
-    var server = require('../../src/server');
-    var Topic = require('../../src/db/models').Topics;
-  });
-
   beforeEach((done) => {
-    var sequelize = require('../../src/db/models/index').sequelize;
     this.topic;
     sequelize.sync({ force: true }).then((response) => {
       Topic.create({
