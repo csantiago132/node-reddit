@@ -17,6 +17,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test && jasmine",
     "migrateDb": "sequelize db:migrate && sequelize db:migrate --env test",
+    "seedDb": "sequelize db:seed:all",
     "start": "cross-env NODE_ENV=development && node src/server.js",
     "eslint:js": "./node_modules/.bin/eslint */**/*.js  --ignore-pattern !.prettierrc --fix --quiet",
     "prettier-md": "prettier --config .prettierrc.json --use-tabs --print-width 80 --write **/*.md",
@@ -36,12 +37,14 @@
     "*.md": ["yarn run prettier-md", "git add"]
   },
   "dependencies": {
+    "body-parser": "1.18.2",
     "cross-env": "^5.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "pg": "7.4.1",
     "pg-hstore": "2.3.2",
-    "sequelize": "4.32.6"
+    "sequelize": "4.32.6",
+    "sequelize-cli": "^5.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -50,6 +53,7 @@
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "faker": "4.1.0",
     "husky": "^1.1.0",
     "jasmine": "3.0.0",
     "lint-staged": "^7.3.0",
