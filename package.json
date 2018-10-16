@@ -17,6 +17,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test && jasmine",
     "migrateDb": "sequelize db:migrate && sequelize db:migrate --env test",
+    "seedDb": "sequelize db:seed:all",
     "start": "cross-env NODE_ENV=development && node src/server.js",
     "eslint:js": "./node_modules/.bin/eslint */**/*.js  --ignore-pattern !.prettierrc --fix --quiet",
     "prettier-md": "prettier --config .prettierrc.json --use-tabs --print-width 80 --write **/*.md",
