@@ -103,4 +103,15 @@ describe('routes : topics', () => {
       });
     });
   });
+
+  describe('GET /topics/:id/edit', () => {
+    it('should render a view with an edit topic form', (done) => {
+      request.get(`${base}/${this.topic.id}/edit`, (error, response, body) => {
+        expect(error).toBeNull();
+        expect(body).toContain('Edit Topic');
+        expect(body).toContain('JS Frameworks');
+        done();
+      });
+    });
+  });
 });
