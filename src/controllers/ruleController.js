@@ -1,5 +1,13 @@
+const ruleQueries = require('../db/queries.topics.js');
+
 module.exports = {
   index(request, response) {
-    response.send('Rule: list all rules');
+    ruleQueries.getAllRules((error, rules) => {
+      if (error) {
+        response.redirect(500, 'static/index');
+      } else {
+        response.render('rule/index', { rules });
+      }
+    });
   },
 };
