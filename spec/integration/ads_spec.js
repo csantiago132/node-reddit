@@ -1,8 +1,9 @@
 const request = require('request');
 const server = require('../../src/server');
-const base = 'http://localhost:5000/ads';
 const sequelize = require('../../src/db/models/index').sequelize;
 const Ads = require('../../src/db/models').Ads;
+
+const base = 'http://localhost:5000/ads';
 
 describe('routes : advertisement', () => {
   beforeEach((done) => {
