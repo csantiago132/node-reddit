@@ -12,7 +12,7 @@ describe('routes : advertisement', () => {
         title: 'Nike',
         description: 'Buy Me!',
       })
-        .then((topic) => {
+        .then((ad) => {
           this.ad = ad;
           done();
         })

@@ -1,5 +1,13 @@
+const adsQueries = require('../db/queries.ads.js');
+
 module.exports = {
   index(request, response) {
-    response.send('Ads: buy me!!');
+    adsQueries.getAllAds((error, ads) => {
+      if (error) {
+        response.redirect(500, 'static/index');
+      } else {
+        response.render('ads/index', { ads });
+      }
+    });
   },
 };
