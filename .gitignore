@@ -11,6 +11,7 @@ build/
 docs/
 ngrok
 
+queries.sh
 # This contains secrets, don't store in source control
 .env 
 secrets.js
