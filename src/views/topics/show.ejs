@@ -7,6 +7,7 @@
 
     <main class="container">
       <h1><%= topic.title %></h1>
+      <a href="/topics/<%= topic.id %>/edit" class="btn btn-warning">Edit</a>
       <form style="display:initial" action="/topics/<%= topic.id %>/destroy" method="post">
         <button type="submit" class="btn btn-danger">Delete</button>
       </form>
