@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <main class="container">
+      <% include ../static/partials/navbar.ejs %>
+      <h1>Rule</h1>
+      <ul class="list-group">
+        <% rules.forEach((rule) => { %>
+          <li class="list-group-item">
+            <a href="/rule/<%= rule.id %>"> <%= rule.title %> </a>
+          </li>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
+</html>
