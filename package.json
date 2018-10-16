@@ -21,7 +21,9 @@
     "eslint:js": "./node_modules/.bin/eslint */**/*.js  --ignore-pattern !.prettierrc --fix --quiet",
     "prettier-md": "prettier --config .prettierrc.json --use-tabs --print-width 80 --write **/*.md",
     "prettier-json": "prettier --config  .prettierrc.json  --write *.json",
-    "prettier-js": "prettier --config  .prettierrc.json  --write *.js"
+    "prettier-js": "prettier --config  .prettierrc.json  --write *.js",
+    "start-psql-server": "pg_ctl -D /usr/local/var/postgres start",
+    "stop-psql-server": "pg_ctl -D /usr/local/var/postgres stop"
   },
   "husky": {
     "hooks": {
