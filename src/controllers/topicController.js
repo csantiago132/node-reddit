@@ -14,4 +14,29 @@ module.exports = {
   new(request, response) {
     response.render('topics/new');
   },
+
+  create(request, response) {
+    let newTopic = {
+      title: request.body.title,
+      description: request.body.description,
+    };
+
+    topicQueries.addTopic(newTopic, (error, topic) => {
+      if (error) {
+        response.redirect(500, '/topics/new');
+      } else {
+        response.redirect(303, `/topics/${topic.id}`);
+      }
+    });
+  },
+
+  show(request, response) {
+    topicQueries.getTopic(request.params.id, (error, topic) => {
+      if (error || topic == null) {
+        response.redirect(404, '/');
+      } else {
+        response.render('topics/show', { topic });
+      }
+    });
+  },
 };

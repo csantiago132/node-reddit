@@ -10,4 +10,27 @@ module.exports = {
         callback(error);
       });
   },
+
+  addTopic(newTopic, callback) {
+    return Topic.create({
+      title: newTopic.title,
+      description: newTopic.description,
+    })
+      .then((topic) => {
+        callback(null, topic);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
+
+  getTopic(id, callback) {
+    return Topic.findById(id)
+      .then((topic) => {
+        callback(null, topic);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };
