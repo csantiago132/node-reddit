@@ -1,7 +1,7 @@
 const request = require('request');
 const server = require('../../src/server');
 const sequelize = require('../../src/db/models/index').sequelize;
-const Topic = require('../../src/db/models').Rule;
+const Rule = require('../../src/db/models').Rule;
 
 const base = 'http://localhost:5000/rule';
 
