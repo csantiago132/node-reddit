@@ -49,4 +49,14 @@ module.exports = {
       }
     });
   },
+
+  edit(request, response) {
+    topicQueries.getTopic(request.params.id, (error, topic) => {
+      if (error || topic == null) {
+        response.redirect(404, '/');
+      } else {
+        response.render('topics/edit', { topic });
+      }
+    });
+  },
 };
