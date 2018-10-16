@@ -45,4 +45,32 @@ describe('routes : topics', () => {
       });
     });
   });
+
+  describe('POST /topics/create', () => {
+    const options = {
+      url: `${base}/create`,
+      form: {
+        title: 'blink-182 songs',
+        description: "What's your favorite blink-182 song?",
+      },
+    };
+
+    it('should create a new topic and redirect', (done) => {
+      request.post(options, (error, response, body) => {
+        Topic.findOne({ where: { title: 'blink-182 songs' } })
+          .then((topic) => {
+            expect(response.statusCode).toBe(303);
+            expect(topic.title).toBe('blink-182 songs');
+            expect(topic.description).toBe(
+              "What's your favorite blink-182 song?",
+            );
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
+      });
+    });
+  });
 });
