@@ -33,4 +33,16 @@ module.exports = {
         callback(error);
       });
   },
+
+  deleteTopic(id, callback) {
+    return Topic.destroy({
+      where: { id },
+    })
+      .then((topic) => {
+        callback(null, topic);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };

@@ -39,4 +39,14 @@ module.exports = {
       }
     });
   },
+
+  destroy(request, response) {
+    topicQueries.deleteTopic(request.params.id, (error, topic) => {
+      if (error) {
+        response.redirect(500, `/topics/${topic.id}`);
+      } else {
+        response.redirect(303, '/topics');
+      }
+    });
+  },
 };
