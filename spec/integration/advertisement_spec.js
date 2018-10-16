@@ -1,6 +1,6 @@
 const request = require('request');
 const server = require('../../src/server');
-const base = 'http://localhost:3000/ads';
+const base = 'http://localhost:5000/ads';
 
 describe('routes : advertisement', () => {
   describe('GET /ads', () => {
