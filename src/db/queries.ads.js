@@ -45,4 +45,16 @@ module.exports = {
         callback(error);
       });
   },
+
+  updateAd(id, callback) {
+    return Ads.update({
+      where: { id },
+    })
+      .then((ad) => {
+        callback(null, ad);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };
