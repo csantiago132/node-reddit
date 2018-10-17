@@ -1,7 +1,7 @@
 const ruleQueries = require('../../db/queries.rule.js');
 
 module.exports = {
-  index(request, response) {
+  index: (request, response) => {
     ruleQueries.getAllRules((error, rules) => {
       if (error) {
         response.redirect(500, 'static/index');
