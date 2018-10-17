@@ -1,7 +1,7 @@
 const topicQueries = require('../../db/queries.topics.js');
 
 module.exports = {
-  index(request, response) {
+  index: (request, response) => {
     topicQueries.getAllTopics((error, topics) => {
       if (error) {
         response.redirect(500, 'static/index');
@@ -11,11 +11,11 @@ module.exports = {
     });
   },
 
-  new(request, response) {
+  new: (request, response) => {
     response.render('topics/new');
   },
 
-  create(request, response) {
+  create: (request, response) => {
     let newTopic = {
       title: request.body.title,
       description: request.body.description,
@@ -30,7 +30,7 @@ module.exports = {
     });
   },
 
-  show(request, response) {
+  show: (request, response) => {
     topicQueries.getTopic(request.params.id, (error, topic) => {
       if (error || topic == null) {
         response.redirect(404, '/');
@@ -40,7 +40,7 @@ module.exports = {
     });
   },
 
-  destroy(request, response) {
+  destroy: (request, response) => {
     topicQueries.deleteTopic(request.params.id, (error, topic) => {
       if (error) {
         response.redirect(500, `/topics/${topic.id}`);
@@ -50,7 +50,7 @@ module.exports = {
     });
   },
 
-  edit(request, response) {
+  edit: (request, response) => {
     topicQueries.getTopic(request.params.id, (error, topic) => {
       if (error || topic == null) {
         response.redirect(404, '/');
@@ -60,7 +60,7 @@ module.exports = {
     });
   },
 
-  update(request, response) {
+  update: (request, response) => {
     topicQueries.updateTopic(
       request.params.id,
       request.body,
