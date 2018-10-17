@@ -11,7 +11,7 @@ module.exports = {
       });
   },
 
-  addAdd(newAd, callback) {
+  addAd(newAd, callback) {
     return Ads.create({
       title: newAd.title,
       description: newAd.description,
