@@ -7,4 +7,6 @@ router.get('/ads', adsController.index);
 
 router.get('/ads/new', adsController.new);
 
+router.post('/ads/create', adsController.create);
+
 module.exports = router;
