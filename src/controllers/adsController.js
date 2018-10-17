@@ -38,4 +38,14 @@ module.exports = {
       }
     });
   },
+
+  destroy(request, response) {
+    adsQueries.deleteAd(request.params.id, (error, ad) => {
+      if (error) {
+        response.redirect(500, `/ads/${ad.id}`);
+      } else {
+        response.redirect(303, '/ads');
+      }
+    });
+  },
 };
