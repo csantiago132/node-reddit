@@ -71,4 +71,14 @@ describe('routes : advertisement', () => {
       });
     });
   });
+
+  describe('GET /ads/:id', () => {
+    it('should render a view with the selected ad', (done) => {
+      request.get(`${base}/${this.ad.id}`, (error, response, body) => {
+        expect(error).toBeNull();
+        expect(body).toContain('Buy Me!');
+        done();
+      });
+    });
+  });
 });
