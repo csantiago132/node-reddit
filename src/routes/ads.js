@@ -11,4 +11,6 @@ router.get('/ads/:id', adsController.show);
 
 router.post('/ads/create', adsController.create);
 
+router.post('/ads/:id/destroy', adsController.destroy);
+
 module.exports = router;
