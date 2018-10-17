@@ -46,15 +46,20 @@ module.exports = {
       });
   },
 
-  updateAd(id, callback) {
-    return Ads.update({
-      where: { id },
-    })
-      .then((ad) => {
-        callback(null, ad);
+  updateAd(id, updatedAd, callback) {
+    return Ads.findById(id).then((ad) => {
+      if (!ad) {
+        return callback('Advertisement not found');
+      }
+      ad.update(updatedAd, {
+        fields: Object.keys(updatedAd),
       })
-      .catch((error) => {
-        callback(error);
-      });
+        .then(() => {
+          callback(null, ad);
+        })
+        .catch((error) => {
+          callback(error);
+        });
+    });
   },
 };
