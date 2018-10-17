@@ -100,4 +100,15 @@ describe('routes : advertisement', () => {
       });
     });
   });
+
+  describe('GET /ads/:id/edit', () => {
+    it('should render a view with an edit ad form', (done) => {
+      request.get(`${base}/${this.ad.id}/edit`, (error, response, body) => {
+        expect(error).toBeNull();
+        expect(body).toContain('Edit Advertisement');
+        expect(body).toContain('Nike');
+        done();
+      });
+    });
+  });
 });
