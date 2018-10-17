@@ -81,4 +81,23 @@ describe('routes : advertisement', () => {
       });
     });
   });
+
+  describe('POST /ads/:id/destroy', () => {
+    it('should delete the ad with the associated ID', (done) => {
+      Ads.all().then((ad) => {
+        const adCountBeforeDelete = ad.length;
+        expect(adCountBeforeDelete).toBe(1);
+        request.post(
+          `${base}/${this.ad.id}/destroy`,
+          (error, response, body) => {
+            Ads.all().then((ad) => {
+              expect(error).toBeNull();
+              expect(ad.length).toBe(adCountBeforeDelete - 1);
+              done();
+            });
+          },
+        );
+      });
+    });
+  });
 });
