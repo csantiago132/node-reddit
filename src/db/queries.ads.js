@@ -33,4 +33,16 @@ module.exports = {
         callback(error);
       });
   },
+
+  deleteAd(id, callback) {
+    return Ads.destroy({
+      where: { id },
+    })
+      .then((ad) => {
+        callback(null, ad);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };
