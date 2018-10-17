@@ -1,4 +1,4 @@
-const ruleQueries = require('../db/queries.rule.js');
+const ruleQueries = require('../../db/queries.rule.js');
 
 module.exports = {
   index(request, response) {

@@ -1,7 +1,7 @@
 const request = require('request');
 const server = require('../../src/server');
-const sequelize = require('../../src/db/models/index').sequelize;
-const Ads = require('../../src/db/models').Ads;
+const sequelize = require('../../db/models/index').sequelize;
+const Ads = require('../../db/models').Ads;
 
 const base = 'http://localhost:5000/ads';
 

@@ -1,4 +1,4 @@
-const adsQueries = require('../db/queries.ads.js');
+const adsQueries = require('../../db/queries.ads.js');
 
 module.exports = {
   index(request, response) {
