@@ -111,4 +111,26 @@ describe('routes : advertisement', () => {
       });
     });
   });
+
+  describe('POST /ads/:id/update', () => {
+    it('should update the ad with the given values', (done) => {
+      const options = {
+        url: `${base}/${this.ad.id}/update`,
+        form: {
+          title: 'Nike Ad Goes here',
+          description: 'There are plenty of shoes on sale!',
+        },
+      };
+
+      request.post(options, (error, response, body) => {
+        expect(error).toBeNull();
+        Ads.findOne({
+          where: { id: this.ad.id },
+        }).then((ad) => {
+          expect(ad.title).toBe('There are plenty of shoes on sale!');
+          done();
+        });
+      });
+    });
+  });
 });
