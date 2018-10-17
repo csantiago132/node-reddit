@@ -67,4 +67,19 @@ describe('Post', () => {
         });
     });
   });
+
+  describe('#setTopic()', () => {
+    it('should associate a topic and a post together', (done) => {
+      Topic.create({
+        title: 'Challenges of interstellar travel',
+        description: '1. The Wi-Fi is terrible',
+      }).then((newTopic) => {
+        expect(this.post.topicId).toBe(this.topic.id);
+        this.post.setTopic(newTopic).then((post) => {
+          expect(post.topicId).toBe(newTopic.id);
+          done();
+        });
+      });
+    });
+  });
 });
