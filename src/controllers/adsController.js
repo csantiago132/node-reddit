@@ -1,7 +1,7 @@
 const adsQueries = require('../../db/queries.ads.js');
 
 module.exports = {
-  index(request, response) {
+  index: (request, response) => {
     adsQueries.getAllAds((error, ads) => {
       if (error) {
         response.redirect(500, 'static/index');
@@ -11,11 +11,11 @@ module.exports = {
     });
   },
 
-  new(request, response) {
+  new: (request, response) => {
     response.render('ads/new');
   },
 
-  create(request, response) {
+  create: (request, response) => {
     let newAd = {
       title: request.body.title,
       description: request.body.description,
@@ -29,7 +29,7 @@ module.exports = {
     });
   },
 
-  show(request, response) {
+  show: (request, response) => {
     adsQueries.getAd(request.params.id, (error, ad) => {
       if (error || ad == null) {
         response.redirect(404, '/');
@@ -39,7 +39,7 @@ module.exports = {
     });
   },
 
-  destroy(request, response) {
+  destroy: (request, response) => {
     adsQueries.deleteAd(request.params.id, (error, ad) => {
       if (error) {
         response.redirect(500, `/ads/${ad.id}`);
@@ -49,7 +49,7 @@ module.exports = {
     });
   },
 
-  edit(request, response) {
+  edit: (request, response) => {
     adsQueries.getAd(request.params.id, (error, ad) => {
       if (error || ad == null) {
         response.redirect(404, '/');
@@ -59,7 +59,7 @@ module.exports = {
     });
   },
 
-  update(request, response) {
+  update: (request, response) => {
     adsQueries.updateAd(request.params.id, request.body, (error, ad) => {
       if (error || ad == null) {
         response.redirect(404, `/ads/${request.params.id}/edit`);
