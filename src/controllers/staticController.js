@@ -1,9 +1,9 @@
 module.exports = {
-  index(request, response) {
+  index: (request, response) => {
     response.render('static/index', { title: 'Welcome to Node-Reddit' });
   },
 
-  about(request, response) {
+  about: (request, response) => {
     response.render('static/about', { title: 'About Us' });
   },
 };

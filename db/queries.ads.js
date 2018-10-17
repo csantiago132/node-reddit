@@ -1,7 +1,7 @@
 const Ads = require('./models').Ads;
 
 module.exports = {
-  getAllAds(callback) {
+  getAllAds: (callback) => {
     return Ads.all()
       .then((ad) => {
         callback(null, ad);
@@ -11,7 +11,7 @@ module.exports = {
       });
   },
 
-  addAd(newAd, callback) {
+  addAd: (newAd, callback) => {
     return Ads.create({
       title: newAd.title,
       description: newAd.description,
@@ -24,7 +24,7 @@ module.exports = {
       });
   },
 
-  getAd(id, callback) {
+  getAd: (id, callback) => {
     return Ads.findById(id)
       .then((ad) => {
         callback(null, ad);
@@ -34,7 +34,7 @@ module.exports = {
       });
   },
 
-  deleteAd(id, callback) {
+  deleteAd: (id, callback) => {
     return Ads.destroy({
       where: { id },
     })
@@ -46,7 +46,7 @@ module.exports = {
       });
   },
 
-  updateAd(id, updatedAd, callback) {
+  updateAd: (id, updatedAd, callback) => {
     return Ads.findById(id).then((ad) => {
       if (!ad) {
         return callback('Advertisement not found');
