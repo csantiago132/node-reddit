@@ -28,4 +28,14 @@ module.exports = {
       }
     });
   },
+
+  show(request, response) {
+    adsQueries.getAd(request.params.id, (error, ad) => {
+      if (error || ad == null) {
+        response.redirect(404, '/');
+      } else {
+        response.render('ads/show', { ad });
+      }
+    });
+  },
 };
