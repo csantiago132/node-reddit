@@ -127,7 +127,7 @@ describe('routes : advertisement', () => {
         Ads.findOne({
           where: { id: this.ad.id },
         }).then((ad) => {
-          expect(ad.title).toBe('There are plenty of shoes on sale!');
+          expect(ad.title).toBe('Nike Ad Goes here');
           done();
         });
       });
