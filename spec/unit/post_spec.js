@@ -1,5 +1,6 @@
 const sequelize = require('../../db/models/index').sequelize;
 const Topic = require('../../db/models').Topic;
+const Post = require('../../db/models').Post;
 
 describe('Post', () => {
   beforeEach((done) => {
@@ -45,6 +46,23 @@ describe('Post', () => {
         })
         .catch((error) => {
           console.log(error);
+          done();
+        });
+    });
+
+    it('should not create a post with missing title, body, or assigned topic', (done) => {
+      Post.create({
+        title: 'Pros of Cryosleep during the long journey',
+      })
+        .then((post) => {
+          // the code in this block will not be evaluated since the validation error
+          // will skip it. Instead, we'll catch the error in the catch block below
+          // and set the expectations there
+          done();
+        })
+        .catch((error) => {
+          expect(error.message).toContain('Post.body cannot be null');
+          expect(error.message).toContain('Post.topicId cannot be null');
           done();
         });
     });
