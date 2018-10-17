@@ -1,7 +1,7 @@
 const Rule = require('./models').Rule;
 
 module.exports = {
-  getAllRules(callback) {
+  getAllRules: (callback) => {
     return Rule.all()
       .then((rules) => {
         callback(null, rules);
