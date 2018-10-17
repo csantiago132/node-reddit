@@ -58,10 +58,10 @@ describe('routes : advertisement', () => {
     it('should create a new ad and redirect', (done) => {
       request.post(options, (error, response, body) => {
         Ads.findOne({ where: { title: 'Nike' } })
-          .then((ads) => {
+          .then((ad) => {
             expect(response.statusCode).toBe(303);
-            expect(topic.title).toBe('Nike');
-            expect(topic.description).toBe('Buy Me!');
+            expect(ad.title).toBe('Nike');
+            expect(ad.description).toBe('Buy Me!');
             done();
           })
           .catch((error) => {
