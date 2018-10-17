@@ -51,6 +51,7 @@ module.exports = {
       if (!topic) {
         return callback('Topic not found');
       }
+
       topic
         .update(updatedTopic, {
           fields: Object.keys(updatedTopic),
