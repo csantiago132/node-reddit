@@ -58,4 +58,14 @@ module.exports = {
       }
     });
   },
+
+  update(request, response) {
+    adsQueries.updateAd(request.params.id, request.body, (error, ad) => {
+      if (error || ad == null) {
+        response.redirect(404, `/ads/${request.params.id}/edit`);
+      } else {
+        response.redirect(`/ads/${ad.id}`);
+      }
+    });
+  },
 };
