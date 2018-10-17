@@ -51,6 +51,7 @@ module.exports = {
       if (!ad) {
         return callback('Advertisement not found');
       }
+
       ad.update(updatedAd, {
         fields: Object.keys(updatedAd),
       })
