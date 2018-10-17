@@ -45,4 +45,30 @@ describe('routes : advertisement', () => {
       });
     });
   });
+
+  describe('POST /topics/create', () => {
+    const options = {
+      url: `${base}/create`,
+      form: {
+        title: 'Nike',
+        description: 'Buy Me!',
+      },
+    };
+
+    it('should create a new ad and redirect', (done) => {
+      request.post(options, (error, response, body) => {
+        Ads.findOne({ where: { title: 'Nike' } })
+          .then((ads) => {
+            expect(response.statusCode).toBe(303);
+            expect(topic.title).toBe('Nike');
+            expect(topic.description).toBe('Buy Me!');
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
+      });
+    });
+  });
 });
