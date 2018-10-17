@@ -10,4 +10,17 @@ module.exports = {
         callback(error);
       });
   },
+
+  addAdd(newAd, callback) {
+    return Ads.create({
+      title: newAd.title,
+      description: newAd.description,
+    })
+      .then((ad) => {
+        callback(null, ad);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };
