@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Ads = sequelize.define(
+  const Ads = sequelize.define(
     'Ads',
     {
       title: DataTypes.STRING,
@@ -8,8 +8,5 @@ module.exports = (sequelize, DataTypes) => {
     },
     {},
   );
-  Ads.associate = function() {
-    // associations can be defined here
-  };
   return Ads;
 };
