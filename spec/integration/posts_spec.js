@@ -10,7 +10,7 @@ describe('routes : posts', () => {
   beforeEach((done) => {
     this.topic;
     this.post;
-    sequelize.sync({ force: true }).then((res) => {
+    sequelize.sync({ force: true }).then((response) => {
       Topic.create({
         title: 'Winter Games',
         description: 'Post your Winter Games stories.',
@@ -35,11 +35,14 @@ describe('routes : posts', () => {
 
   describe('GET /topics/:topicId/posts/new', () => {
     it('should render a new post form', (done) => {
-      request.get(`${base}/${topic.id}/posts/new`, (error, response, body) => {
-        expect(error).toBeNull();
-        expect(body).toContain('New Post');
-        done();
-      });
+      request.get(
+        `${base}/${this.topic.id}/posts/new`,
+        (error, response, body) => {
+          expect(error).toBeNull();
+          expect(body).toContain('New Post');
+          done();
+        },
+      );
     });
   });
 });
