@@ -33,4 +33,15 @@ module.exports = {
         callback(error);
       });
   },
+  // TODO: double-check where this method is being used
+  // pops-up on ESLint as a duplicate
+  getPosts: (id, callback) => {
+    return Post.findById(id)
+      .then((post) => {
+        callback(null, post);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };

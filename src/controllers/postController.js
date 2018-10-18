@@ -44,4 +44,14 @@ module.exports = {
       }
     });
   },
+
+  edit: (request, response) => {
+    postQueries.getPost(request.params.id, (error, post) => {
+      if (error || post == null) {
+        response.redirect(404, '/');
+      } else {
+        response.render('posts/edit', { post });
+      }
+    });
+  },
 };
