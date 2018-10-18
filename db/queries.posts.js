@@ -21,4 +21,16 @@ module.exports = {
         callback(error);
       });
   },
+
+  deletePost: (id, callback) => {
+    return Post.destroy({
+      where: { id },
+    })
+      .then((deletedRecordsCount) => {
+        callback(null, deletedRecordsCount);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };

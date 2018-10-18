@@ -6,6 +6,7 @@ const postController = require('../controllers/postController');
 router
   .get('/topics/:topicId/posts/new', postController.new)
   .get('/topics/:topicId/posts/:id', postController.show)
+  .post('/topics/:topicId/posts/:id/destroy', postController.destroy)
   .post('/topics/:topicId/posts/create', postController.create);
 
 module.exports = router;
