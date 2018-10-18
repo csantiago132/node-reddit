@@ -54,4 +54,19 @@ module.exports = {
       }
     });
   },
+
+  update: (request, response) => {
+    postQueries.updatePost(request.params.id, request.body, (error, post) => {
+      if (error || post == null) {
+        response.redirect(
+          404,
+          `/topics/${request.params.topicId}/posts/${request.params.id}/edit`,
+        );
+      } else {
+        response.redirect(
+          `/topics/${request.params.topicId}/posts/${request.params.id}`,
+        );
+      }
+    });
+  },
 };

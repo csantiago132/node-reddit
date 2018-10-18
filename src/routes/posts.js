@@ -8,6 +8,7 @@ router
   .get('/topics/:topicId/posts/:id', postController.show)
   .get('/topics/:topicId/posts/:id/edit', postController.edit)
   .post('/topics/:topicId/posts/:id/destroy', postController.destroy)
-  .post('/topics/:topicId/posts/create', postController.create);
+  .post('/topics/:topicId/posts/create', postController.create)
+  .post('/topics/:topicId/posts/:id/update', postController.update);
 
 module.exports = router;

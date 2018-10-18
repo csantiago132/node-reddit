@@ -44,4 +44,22 @@ module.exports = {
         callback(error);
       });
   },
+
+  updatePost(id, updatedPost, callback) {
+    return Post.findById(id).then((post) => {
+      if (!post) {
+        return callback('Post not found');
+      }
+      post
+        .update(updatedPost, {
+          fields: Object.keys(updatedPost),
+        })
+        .then(() => {
+          callback(null, post);
+        })
+        .catch((error) => {
+          callback(error);
+        });
+    });
+  },
 };
