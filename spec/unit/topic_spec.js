@@ -1,4 +1,4 @@
-const sequelize = require('../../src/models/index').sequelize;
+const sequelize = require('../../db/models/index').sequelize;
 const Topic = require('../../db/models').Topic;
 const Post = require('../../db/models').Post;
 
