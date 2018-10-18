@@ -45,4 +45,33 @@ describe('routes : posts', () => {
       );
     });
   });
+
+  describe('POST /topics/:topicId/posts/create', () => {
+    it('should create a new post and redirect', (done) => {
+      const options = {
+        url: `${base}/${this.topic.id}/posts/create`,
+        form: {
+          title: 'Watching snow melt',
+          body:
+            'Without a doubt my favoriting things to do besides watching paint dry!',
+        },
+      };
+      request.post(options, (error, response, body) => {
+        Post.findOne({ where: { title: 'Watching snow melt' } })
+          .then((post) => {
+            expect(post).not.toBeNull();
+            expect(post.title).toBe('Watching snow melt');
+            expect(post.body).toBe(
+              'Without a doubt my favoriting things to do besides watching paint dry!',
+            );
+            expect(post.topicId).not.toBeNull();
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
+      });
+    });
+  });
 });
