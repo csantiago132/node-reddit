@@ -11,4 +11,14 @@ module.exports = {
         callback(error);
       });
   },
+
+  getPost(id, callback) {
+    return Post.findById(id)
+      .then((post) => {
+        callback(null, post);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
 };
