@@ -37,6 +37,7 @@
     "*.md": ["yarn run prettier-md", "git add"]
   },
   "dependencies": {
+    "bcryptjs": "2.4.3",
     "body-parser": "1.18.2",
     "cross-env": "^5.2.0",
     "ejs": "^2.6.1",
@@ -44,6 +45,8 @@
     "express-flash": "0.0.2",
     "express-session": "1.15.6",
     "express-validator": "5.0.2",
+    "passport": "0.4.0",
+    "passport-local": "1.0.0",
     "pg": "7.4.1",
     "pg-hstore": "2.3.2",
     "sequelize": "4.32.6",

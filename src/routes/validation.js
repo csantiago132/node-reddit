@@ -1,5 +1,5 @@
 module.exports = {
-  validatePosts(request, response, next) {
+  validatePosts: (request, response, next) => {
     if (request.method === 'POST') {
       request
         .checkParams('topicId', 'must be valid')
@@ -22,7 +22,7 @@ module.exports = {
     }
   },
 
-  validateTopics(request, response, next) {
+  validateTopics: (request, response, next) => {
     if (request.method === 'POST') {
       request
         .checkBody('title', 'must be at least 2 characters in length')
@@ -36,6 +36,27 @@ module.exports = {
     if (errors) {
       request.flash('error', errors);
       return response.redirect(303, request.headers.referer);
+    } else {
+      return next();
+    }
+  },
+
+  validateUsers: (request, response, next) => {
+    if (request.method === 'POST') {
+      request.checkBody('email', 'must be valid').isEmail();
+      request
+        .checkBody('password', 'must be at least 6 characters in length')
+        .isLength({ min: 6 });
+      request
+        .checkBody('passwordConfirmation', 'must match password provided')
+        .optional()
+        .matches(request.body.password);
+    }
+
+    const errors = request.validationErrors();
+    if (errors) {
+      request.flash('error', errors);
+      return response.redirect(request.headers.referer);
     } else {
       return next();
     }
