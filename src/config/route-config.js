@@ -5,11 +5,13 @@ module.exports = {
     const ruleRoutes = require('../routes/rule');
     const adsRoutes = require('../routes/ads');
     const postRoutes = require('../routes/posts');
+    const flairRoutes = require('../routes/flairs');
 
     application.use(staticRoutes);
     application.use(topicRoutes);
     application.use(ruleRoutes);
     application.use(adsRoutes);
     application.use(postRoutes);
+    application.use(flairRoutes);
   },
 };

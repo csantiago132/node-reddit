@@ -23,6 +23,6 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "use_env_variable": "postgresql-parallel-90714"
+    "use_env_variable": "DATABASE_URL"
   }
 }
