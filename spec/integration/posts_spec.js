@@ -73,6 +73,27 @@ describe('routes : posts', () => {
           });
       });
     });
+
+    it('should not create a new post that fails validations', (done) => {
+      const options = {
+        url: `${base}/${this.topic.id}/posts/create`,
+        form: {
+          title: 'a',
+          body: 'b',
+        },
+      };
+      request.post(options, (error, response, body) => {
+        Post.findOne({ where: { title: 'a' } })
+          .then((post) => {
+            expect(post).toBeNull();
+            done();
+          })
+          .catch((error) => {
+            console.log(error);
+            done();
+          });
+      });
+    });
   });
 
   describe('GET /topics/:topicId/posts/:id', () => {
@@ -124,7 +145,7 @@ describe('routes : posts', () => {
         {
           url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
           form: {
-            title: 'Snowman Building Competition',
+            title: 'Snowball Fighting',
             body: 'I love watching them melt slowly.',
           },
         },
@@ -147,7 +168,7 @@ describe('routes : posts', () => {
         Post.findOne({
           where: { id: this.post.id },
         }).then((post) => {
-          expect(post.title).toBe('Snowman Building Competition');
+          expect(post.title).toBe('Snowball Fighting');
           done();
         });
       });
