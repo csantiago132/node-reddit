@@ -62,18 +62,28 @@ describe('routes : users', () => {
             password: '123456789',
           },
         },
-        (err, res, body) => {
+        (error, response, body) => {
           User.findOne({ where: { email: 'no' } })
             .then((user) => {
               expect(user).toBeNull();
               done();
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((error) => {
+              console.log(error);
               done();
             });
         },
       );
+    });
+  });
+
+  describe('GET /users/sign_in', () => {
+    it('should render a view with a sign in form', (done) => {
+      request.get(`${base}/sign_in`, (error, response, body) => {
+        expect(error).toBeNull();
+        expect(body).toContain('Sign in');
+        done();
+      });
     });
   });
 });

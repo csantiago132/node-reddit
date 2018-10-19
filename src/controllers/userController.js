@@ -26,4 +26,20 @@ module.exports = {
       }
     });
   },
+
+  signInForm: (request, response) => {
+    response.render('users/sign_in');
+  },
+
+  signIn: (request, response) => {
+    passport.authenticate('local')(request, response, () => {
+      if (!request.user) {
+        request.flash('notice', 'Sign in failed. Please try again.');
+        response.redirect('/users/sign_in');
+      } else {
+        request.flash('notice', "You've successfully signed in!");
+        response.redirect('/');
+      }
+    });
+  },
 };
