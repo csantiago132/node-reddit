@@ -42,4 +42,10 @@ module.exports = {
       }
     });
   },
+
+  signOut: (request, response) => {
+    request.logout();
+    request.flash('notice', "You've successfully signed out!");
+    response.redirect('/');
+  },
 };
