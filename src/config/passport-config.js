@@ -38,8 +38,6 @@ module.exports = {
           callback(null, user);
         })
         .catch((error) => {
-          // user not def, if needed, use:
-          // callback(error, user)
           callback(error);
         });
     });
