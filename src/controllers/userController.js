@@ -12,8 +12,6 @@ module.exports = {
       password: request.body.password,
       passwordConfirmation: request.body.passwordConfirmation,
     };
-    // user not def at first, if needed, use:
-    // userQueries.createUser(newUser, (error, user)
     userQueries.createUser(newUser, (error) => {
       if (error) {
         request.flash('error', error);

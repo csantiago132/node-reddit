@@ -31,8 +31,6 @@ module.exports = {
   },
 
   destroy: (request, response) => {
-    // TODO: see if this param is needed later (deletedRecordsCount)
-    // Prev: ...deletePost(request.params.id, (error, deletedRecordsCount)
     postQueries.deletePost(request.params.id, (error) => {
       if (error) {
         response.redirect(
