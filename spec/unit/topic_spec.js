@@ -1,40 +1,44 @@
 const sequelize = require('../../db/models/index').sequelize;
 const Topic = require('../../db/models').Topic;
 const Post = require('../../db/models').Post;
+const User = require('../../db/models').User;
 
 describe('Topic', () => {
   beforeEach((done) => {
     this.topic;
     this.post;
+    this.user;
     sequelize.sync({ force: true }).then((response) => {
-      Topic.create(
-        {
-          title: 'Expeditions to Alpha Centauri',
-          description:
-            'A compilation of reports from recent visits to the star system.',
-          posts: [
-            {
-              title: 'My first time at Proxima Centauri',
-              body: 'I wrote something about it.',
-            },
-          ],
-        },
-        {
-          include: {
-            model: Post,
-            as: 'posts',
+      User.create({
+        email: 'starman@tesla.com',
+        password: 'Trekkie4lyfe',
+      }).then((user) => {
+        this.user = user; //store the user
+        Topic.create(
+          {
+            title: 'Expeditions to Alpha Centauri',
+            description:
+              'A compilation of reports from recent visits to the star system.',
+            posts: [
+              {
+                title: 'My first visit to Proxima Centauri b',
+                body: 'I saw some rocks.',
+                userId: this.user.id,
+              },
+            ],
           },
-        },
-      )
-        .then((topic) => {
-          this.topic = topic;
-          this.post = topic.posts[0];
-          done();
-        })
-        .catch((error) => {
-          console.log(error);
+          {
+            include: {
+              model: Post,
+              as: 'posts',
+            },
+          },
+        ).then((topic) => {
+          this.topic = topic; //store the topic
+          this.post = topic.posts[0]; //store the post
           done();
         });
+      });
     });
   });
   describe('#create()', () => {
@@ -70,7 +74,7 @@ describe('Topic', () => {
   describe('#getPosts()', () => {
     it('should return the associated posts', (done) => {
       this.topic.getPosts().then((posts) => {
-        expect(posts[0].title).toBe('My first time at Proxima Centauri');
+        expect(posts[0].title).toBe('My first visit to Proxima Centauri b');
         done();
       });
     });
