@@ -1,5 +1,5 @@
 module.exports = {
-  init(application) {
+  init: (application) => {
     const staticRoutes = require('../routes/static');
     const topicRoutes = require('../routes/topics');
     const ruleRoutes = require('../routes/rule');
