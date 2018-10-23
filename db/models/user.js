@@ -14,8 +14,24 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'member',
+      },
     },
     {},
   );
+  User.associate = (models) => {
+    User.hasMany(models.Post, {
+      foreignKey: 'userId',
+      as: 'posts',
+    });
+  };
+
+  User.prototype.isAdmin = () => {
+    return this.role === 'admin';
+  };
+
   return User;
 };
