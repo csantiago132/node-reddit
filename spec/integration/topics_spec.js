@@ -1,9 +1,10 @@
 const request = require('request');
 const server = require('../../src/server');
-const base = 'http://localhost:5000/topics/';
 const sequelize = require('../../db/models/index').sequelize;
 const Topic = require('../../db/models').Topic;
 const User = require('../../db/models').User;
+
+const base = 'http://localhost:5000/topics';
 
 describe('routes : topics', () => {
   beforeEach((done) => {
@@ -177,7 +178,7 @@ describe('routes : topics', () => {
           Topic.findOne({
             where: { id: this.topic.id },
           }).then((topic) => {
-            expect(topic.title).toBe('JavaScript Frameworks');
+            expect(topic.title).toBe('JS Frameworks');
             done();
           });
         });

@@ -74,7 +74,7 @@ describe('Topic', () => {
   describe('#getPosts()', () => {
     it('should return the associated posts', (done) => {
       this.topic.getPosts().then((posts) => {
-        expect(posts[0].title).toBe('My first time at Proxima Centauri');
+        expect(posts[0].title).toBe('My first visit to Proxima Centauri b');
         done();
       });
     });
