@@ -55,6 +55,7 @@ describe('routes : votes', () => {
     });
   });
 
+  // guests
   describe('guest attempting to vote on a post', () => {
     beforeEach((done) => {
       request.get(
@@ -95,6 +96,7 @@ describe('routes : votes', () => {
     });
   });
 
+  // signed-in member
   describe('signed in user voting on a post', () => {
     beforeEach((done) => {
       request.get(
@@ -153,6 +155,35 @@ describe('routes : votes', () => {
           })
             .then((vote) => {
               // confirm that a downvote was created
+              expect(vote).not.toBeNull();
+              expect(vote.value).toBe(-1);
+              expect(vote.userId).toBe(this.user.id);
+              expect(vote.postId).toBe(this.post.id);
+              done();
+            })
+            .catch((error) => {
+              console.log(error);
+              done();
+            });
+        });
+      });
+    });
+
+    // Create more than one vote per user for a given post.
+    // This scenario should not be successful.
+    describe('GET /topics/:topicId/posts/:postId/votes/downvote', () => {
+      it('should not create multiple votes for a user', (done) => {
+        const options = {
+          url: `${base}${this.topic.id}/posts/${this.post.id}/votes/downvote`,
+        };
+        request.get(options, (error, response, body) => {
+          Vote.findOne({
+            where: {
+              userId: this.user.id,
+              postId: this.post.id,
+            },
+          })
+            .then((vote) => {
               expect(vote).not.toBeNull();
               expect(vote.value).toBe(-1);
               expect(vote.userId).toBe(this.user.id);
