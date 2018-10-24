@@ -5,7 +5,7 @@ const Topic = require('../../db/models').Topic;
 const Post = require('../../db/models').Post;
 const User = require('../../db/models').User;
 
-const base = 'http://localhost:5000/posts';
+const base = 'http://localhost:5000/topics';
 
 describe('routes : posts', () => {
   beforeEach((done) => {
@@ -13,12 +13,13 @@ describe('routes : posts', () => {
     this.post;
     this.user;
 
-    sequelize.sync({ force: true }).then((res) => {
+    sequelize.sync({ force: true }).then((response) => {
       User.create({
         email: 'starman@tesla.com',
         password: 'Trekkie4lyfe',
       }).then((user) => {
         this.user = user;
+
         Topic.create(
           {
             title: 'Winter Games',
@@ -64,7 +65,7 @@ describe('routes : posts', () => {
               email: user.email,
             },
           },
-          (err, res, body) => {
+          (error, response, body) => {
             done();
           },
         );
@@ -73,11 +74,14 @@ describe('routes : posts', () => {
 
     describe('GET /topics/:topicId/posts/new', () => {
       it('should redirect to topics view', (done) => {
-        request.get(`${base}/${this.topic.id}/posts/new`, (err, res, body) => {
-          expect(err).toBeNull();
-          expect(body).toContain('Posts');
-          done();
-        });
+        request.get(
+          `${base}/${this.topic.id}/posts/new`,
+          (error, response, body) => {
+            expect(error).toBeNull();
+            expect(body).toContain('Posts');
+            done();
+          },
+        );
       });
     });
 
@@ -87,18 +91,16 @@ describe('routes : posts', () => {
           url: `${base}/${this.topic.id}/posts/create`,
           form: {
             title: 'Watching snow melt',
-            body:
-              'Without a doubt my favoriting things to do besides watching paint dry!',
           },
         };
-        request.post(options, (err, res, body) => {
+        request.post(options, (error, response, body) => {
           Post.findOne({ where: { title: 'Watching snow melt' } })
             .then((post) => {
               expect(post).toBeNull(); // no post should be returned
               done();
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((error) => {
+              console.log(error);
               done();
             });
         });
@@ -109,8 +111,8 @@ describe('routes : posts', () => {
       it('should render a view with the selected post', (done) => {
         request.get(
           `${base}/${this.topic.id}/posts/${this.post.id}`,
-          (err, res, body) => {
-            expect(err).toBeNull();
+          (error, response, body) => {
+            expect(error).toBeNull();
             expect(body).toContain('Snowball Fighting');
             done();
           },
@@ -123,9 +125,9 @@ describe('routes : posts', () => {
         expect(this.post.id).toBe(1);
         request.post(
           `${base}/${this.topic.id}/posts/${this.post.id}/destroy`,
-          (err, res, body) => {
+          (error, response, body) => {
             Post.findById(1).then((post) => {
-              expect(err).toBeNull();
+              expect(error).toBeNull();
               expect(post).not.toBeNull();
               done();
             });
@@ -138,8 +140,8 @@ describe('routes : posts', () => {
       it('should not render a view with an edit post form', (done) => {
         request.get(
           `${base}/${this.topic.id}/posts/${this.post.id}/edit`,
-          (err, res, body) => {
-            expect(err).toBeNull();
+          (error, response, body) => {
+            expect(error).toBeNull();
             expect(body).not.toContain('Edit Post');
             done();
           },
@@ -153,12 +155,12 @@ describe('routes : posts', () => {
           {
             url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
             form: {
-              title: 'Snowman Building Competition',
+              title: 'Snowball Fighting',
               body: 'I love watching them melt slowly.',
             },
           },
-          (err, res, body) => {
-            expect(res.statusCode).not.toBe(302);
+          (error, response, body) => {
+            expect(response.statusCode).not.toBe(302);
             done();
           },
         );
@@ -184,7 +186,7 @@ describe('routes : posts', () => {
               email: user.email,
             },
           },
-          (err, res, body) => {
+          (error, response, body) => {
             done();
           },
         );
@@ -193,11 +195,14 @@ describe('routes : posts', () => {
 
     describe('GET /topics/:topicId/posts/new', () => {
       it('should render a new post form', (done) => {
-        request.get(`${base}/${this.topic.id}/posts/new`, (err, res, body) => {
-          expect(err).toBeNull();
-          expect(body).toContain('New Post');
-          done();
-        });
+        request.get(
+          `${base}/${this.topic.id}/posts/new`,
+          (error, response, body) => {
+            expect(error).toBeNull();
+            expect(body).toContain('Post');
+            done();
+          },
+        );
       });
     });
 
@@ -222,8 +227,8 @@ describe('routes : posts', () => {
               expect(post.topicId).not.toBeNull();
               done();
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((error) => {
+              console.log(error);
               done();
             });
         });
@@ -238,14 +243,14 @@ describe('routes : posts', () => {
           },
         };
 
-        request.post(options, (err, res, body) => {
+        request.post(options, (error, response, body) => {
           Post.findOne({ where: { title: 'a' } })
             .then((post) => {
               expect(post).toBeNull();
               done();
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((error) => {
+              console.log(error);
               done();
             });
         });
@@ -256,8 +261,8 @@ describe('routes : posts', () => {
       it('should render a view with the selected post', (done) => {
         request.get(
           `${base}/${this.topic.id}/posts/${this.post.id}`,
-          (err, res, body) => {
-            expect(err).toBeNull();
+          (error, response, body) => {
+            expect(error).toBeNull();
             expect(body).toContain('Snowball Fighting');
             done();
           },
@@ -270,9 +275,9 @@ describe('routes : posts', () => {
         expect(this.post.id).toBe(1);
         request.post(
           `${base}/${this.topic.id}/posts/${this.post.id}/destroy`,
-          (err, res, body) => {
+          (error, response, body) => {
             Post.findById(1).then((post) => {
-              expect(err).toBeNull();
+              expect(error).toBeNull();
               expect(post).toBeNull();
               done();
             });
@@ -285,8 +290,8 @@ describe('routes : posts', () => {
       it('should render a view with an edit post form', (done) => {
         request.get(
           `${base}/${this.topic.id}/posts/${this.post.id}/edit`,
-          (err, res, body) => {
-            expect(err).toBeNull();
+          (error, response, body) => {
+            expect(error).toBeNull();
             expect(body).toContain('Edit Post');
             expect(body).toContain('Snowball Fighting');
             done();
@@ -305,8 +310,8 @@ describe('routes : posts', () => {
               body: 'I love watching them melt slowly.',
             },
           },
-          (err, res, body) => {
-            expect(res.statusCode).toBe(302);
+          (error, response, body) => {
+            expect(response.statusCode).toBe(302);
             done();
           },
         );
@@ -320,12 +325,12 @@ describe('routes : posts', () => {
             body: 'I love watching them melt slowly.',
           },
         };
-        request.post(options, (err, res, body) => {
-          expect(err).toBeNull();
+        request.post(options, (error, response, body) => {
+          expect(error).toBeNull();
           Post.findOne({
             where: { id: this.post.id },
           }).then((post) => {
-            expect(post.title).toBe('Snowball Fighting');
+            expect(post.title).toBe('Snowman Building Competition');
             done();
           });
         });

@@ -14,6 +14,7 @@ module.exports = {
 
   new: (request, response) => {
     const authorized = new Authorizer(request.user).new();
+
     if (authorized) {
       response.render('topics/new');
     } else {
@@ -24,6 +25,7 @@ module.exports = {
 
   create: (request, response) => {
     const authorized = new Authorizer(request.user).create();
+
     if (authorized) {
       let newTopic = {
         title: request.body.title,
@@ -68,6 +70,7 @@ module.exports = {
         response.redirect(404, '/');
       } else {
         const authorized = new Authorizer(request.user, topic).edit();
+
         if (authorized) {
           response.render('topics/edit', { topic });
         } else {

@@ -4,19 +4,18 @@ const Authorizer = require('../policies/post');
 module.exports = {
   new: (request, response) => {
     const authorized = new Authorizer(request.user).new();
+
     if (authorized) {
-      response.render('posts/new', {
-        topicId: request.params.topicId,
-        title: 'New Post',
-      });
+      response.render('posts/new', { topicId: request.params.topicId });
     } else {
       request.flash('notice', 'You are not authorized to do that.');
-      response.redirect(`/posts`);
+      response.redirect('/posts');
     }
   },
 
   create: (request, response) => {
     const authorized = new Authorizer(request.user).create();
+
     if (authorized) {
       let newPost = {
         title: request.body.title,
@@ -33,7 +32,7 @@ module.exports = {
       });
     } else {
       request.flash('notice', 'You are not authorized to do that.');
-      response.redirect(`/topics/${request.params.topicId}`);
+      response.redirect('/topics/${request.params.topicId}');
     }
   },
 
@@ -48,20 +47,14 @@ module.exports = {
   },
 
   destroy: (request, response) => {
-    postQueries.deletePost(request, (error, post) => {
+    postQueries.deletePost(request, (error) => {
       if (error) {
         response.redirect(
           error,
           `/topics/${request.params.topicId}/posts/${request.params.id}`,
         );
       } else {
-        const authorized = new Authorizer(request.user, post).destroy();
-        if (authorized) {
-          response.redirect(303, `/topics/${request.params.topicId}`);
-        } else {
-          request.flash('notice', 'You are not authorized to do that.');
-          response.redirect(`/topics/${request.params.topicId}`);
-        }
+        response.redirect(303, `/topics/${request.params.topicId}`);
       }
     });
   },
@@ -72,10 +65,11 @@ module.exports = {
         response.redirect(404, '/');
       } else {
         const authorized = new Authorizer(request.user, post).edit();
+
         if (authorized) {
           response.render('posts/edit', { post });
         } else {
-          request.flash('notice', 'You are not authorized to do that.');
+          request.flash('You are not authorized to do that.');
           response.redirect(
             `/topics/${request.params.topicId}/posts/${request.params.id}`,
           );
