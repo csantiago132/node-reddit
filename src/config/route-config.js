@@ -1,5 +1,5 @@
 module.exports = {
-  init(application) {
+  init: (app) => {
     const staticRoutes = require('../routes/static');
     const topicRoutes = require('../routes/topics');
     const ruleRoutes = require('../routes/rule');
@@ -10,15 +10,15 @@ module.exports = {
 
     if (process.env.NODE_ENV === 'test') {
       const mockAuth = require('../../spec/support/mock-auth.js');
-      mockAuth.fakeIt(application);
+      mockAuth.fakeIt(app);
     }
 
-    application.use(staticRoutes);
-    application.use(topicRoutes);
-    application.use(ruleRoutes);
-    application.use(adsRoutes);
-    application.use(postRoutes);
-    application.use(flairRoutes);
-    application.use(userRoutes);
+    app.use(staticRoutes);
+    app.use(topicRoutes);
+    app.use(ruleRoutes);
+    app.use(adsRoutes);
+    app.use(postRoutes);
+    app.use(flairRoutes);
+    app.use(userRoutes);
   },
 };

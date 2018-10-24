@@ -15,7 +15,7 @@
   },
   "main": "src/server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test && jasmine",
+    "test": "export NODE_ENV=test && jasmine",
     "migrateDb": "sequelize db:migrate && sequelize db:migrate --env test",
     "seedDb": "sequelize db:seed:all",
     "start": "cross-env NODE_ENV=development && node src/server.js",

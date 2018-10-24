@@ -9,7 +9,6 @@ const passportConfig = require('./passport-config');
 
 module.exports = {
   init(app, express) {
-    passportConfig.init(app);
     app.set('views', viewsFolder);
     app.set('view engine', 'ejs');
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +24,7 @@ module.exports = {
       }),
     );
     app.use(flash());
+    passportConfig.init(app);
     app.use((request, response, next) => {
       response.locals.currentUser = request.user;
       next();
