@@ -6,13 +6,13 @@ module.exports = {
       id = request.body.userId || id;
       email = request.body.email || email;
 
-      if (id && id != 0) {
+      if (id && id !== 0) {
         request.user = {
           id: id,
           email: email,
           role: role,
         };
-      } else if (id == 0) {
+      } else if (id === 0) {
         delete request.user;
       }
 
