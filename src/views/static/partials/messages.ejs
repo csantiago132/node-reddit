@@ -1,18 +1,22 @@
 <% if(messages.error || messages.notice) { %>
-
   <div class="alert alert-<%= messages.error ? 'danger' : 'warning' %> alert-dismissible fade show" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">&times;</span>
       </button>
       <% if(messages.error) { %>
       Validation errors:
       <ul>
-        <% messages.error.forEach((err) => { %>
-          <li><%= `${err.param} ${err.msg}` %></li>
-        <% }) %>
+          <% messages.error.forEach((err) => { %>
+          <li>
+              <%= `${err.param} ${err.msg}` %>
+          </li>
+          <% }) %>
       </ul>
       <% } else { %>
-        <p><%= messages.notice %></p>
+      <p>
+          <%= messages.notice %>
+      </p>
       <% } %>
-    </div>
+  </div>
   <% } %>
+  
