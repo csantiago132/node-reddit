@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     'Post',
@@ -36,6 +37,22 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'postId',
       as: 'comments',
     });
+    Post.hasMany(models.Vote, {
+      foreignKey: 'postId',
+      as: 'votes',
+    });
   };
+
+  Post.prototype.getPoints = () => {
+    if (this.votes.length === 0) return 0;
+    return this.votes
+      .map((v) => {
+        return v.value;
+      })
+      .reduce((prev, next) => {
+        return prev + next;
+      });
+  };
+
   return Post;
 };
