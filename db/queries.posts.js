@@ -3,6 +3,7 @@ const Comment = require('./models').Comment;
 const User = require('./models').User;
 const Vote = require('./models').Vote;
 const Authorizer = require('../src/policies/application');
+const Favorite = require('./models').Favorite;
 
 module.exports = {
   addPost: (newPost, callback) => {
@@ -30,6 +31,10 @@ module.exports = {
         {
           model: Vote,
           as: 'votes',
+        },
+        {
+          model: Favorite,
+          as: 'favorites',
         },
       ],
     })
