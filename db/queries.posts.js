@@ -1,6 +1,7 @@
 const Post = require('./models').Post;
 const Comment = require('./models').Comment;
 const User = require('./models').User;
+const Vote = require('./models').Vote;
 const Authorizer = require('../src/policies/application');
 
 module.exports = {
@@ -25,6 +26,10 @@ module.exports = {
               model: User,
             },
           ],
+        },
+        {
+          model: Vote,
+          as: 'votes',
         },
       ],
     })
