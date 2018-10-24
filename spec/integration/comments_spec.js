@@ -53,13 +53,13 @@ describe('routes : comments', () => {
                 this.comment = comment;
                 done();
               })
-              .catch((erroror) => {
-                console.log(erroror);
+              .catch((error) => {
+                console.log(error);
                 done();
               });
           })
-          .catch((erroror) => {
-            console.log(erroror);
+          .catch((error) => {
+            console.log(error);
             done();
           });
       });
@@ -186,5 +186,93 @@ describe('routes : comments', () => {
         });
       });
     });
-  }); //end context for signed in user
+  });
+
+  // Member user tries to delete another member user's comment.
+  // This should not be successful.
+  describe('POST /topics/:topicId/posts/:postId/comments/:id/destroy', () => {
+    it('should not delete the comment with the associated ID of another member', (done) => {
+      User.create({
+        email: 'shouldNotDelete@email.com',
+        password: '123456',
+      }).then((user) => {
+        expect(user.email).toBe('shouldNotDelete@email.com');
+        expect(user.id).toBe(2);
+
+        request.get(
+          {
+            url: 'http://localhost:5000/auth/fake',
+            form: {
+              role: 'member',
+              userId: user.id,
+            },
+          },
+          (error, response, body) => {
+            done();
+          },
+        );
+
+        Comment.all().then((comments) => {
+          const commentCountBeforeDelete = comments.length;
+          expect(commentCountBeforeDelete).toBe(1);
+          request.post(
+            `${base}${this.topic.id}/posts/${this.post.id}/comments/${
+              this.comment.id
+            }/destroy`,
+            (error, response, body) => {
+              Comment.all().then((comments) => {
+                expect(error).toBeNull();
+                expect(comments.length).toBe(commentCountBeforeDelete);
+                done();
+              });
+            },
+          );
+        });
+      });
+    });
+  });
+
+  // Admin user tries to delete member user's comment.
+  // This should be successful.
+  describe('POST /topics/:topicId/posts/:postId/comments/:id/destroy', () => {
+    it('admin should not delete the comment with the associated ID of another member', (done) => {
+      User.create({
+        email: 'shouldNotDelete2@email.com',
+        password: '123456',
+      }).then((user) => {
+        expect(user.email).toBe('shouldNotDelete2@email.com');
+        expect(user.id).toBe(2);
+
+        request.get(
+          {
+            url: 'http://localhost:5000/auth/fake',
+            form: {
+              role: 'admin',
+              userId: user.id,
+            },
+          },
+          (error, response, body) => {
+            done();
+          },
+        );
+
+        Comment.all().then((comments) => {
+          const commentCountBeforeDelete = comments.length;
+          expect(commentCountBeforeDelete).toBe(1);
+          request.post(
+            `${base}${this.topic.id}/posts/${this.post.id}/comments/${
+              this.comment.id
+            }/destroy`,
+            (error, response, body) => {
+              Comment.all().then((comments) => {
+                expect(error).toBeNull();
+                expect(comments.length).toBe(commentCountBeforeDelete);
+                done();
+              });
+            },
+          );
+        });
+      });
+    });
+  });
 });
