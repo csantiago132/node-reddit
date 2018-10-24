@@ -54,5 +54,17 @@ module.exports = (sequelize, DataTypes) => {
       });
   };
 
+  Post.prototype.hasUpvoteFor = (userId) => {
+    if (this.votes.userId == userId && this.votes.value === 1) {
+      return true;
+    }
+  };
+
+  Post.prototype.hasDownvoteFor = (userId) => {
+    if (this.votes.userId == userId && this.votes.value === -1) {
+      return true;
+    }
+  };
+
   return Post;
 };
