@@ -192,10 +192,10 @@ describe('routes : comments', () => {
 
       it('should not delete the comment with the associated ID of another member', (done) => {
         User.create({
-          email: 'shouldNotDeleteComment@email.com',
+          email: 'shouldNotDelete@email.com',
           password: '123456',
         }).then((user) => {
-          expect(user.email).toBe('shouldNotDeleteComment@email.com');
+          expect(user.email).toBe('shouldNotDelete@email.com');
           expect(user.id).toBe(2);
 
           request.get(
