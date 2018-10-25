@@ -3,8 +3,10 @@ const Authorizer = require('../policies/comment.js');
 
 module.exports = {
   create: (request, response) => {
+    /* check the policy to confirm the user can create comments */
     const authorized = new Authorizer(request.user).create();
     if (authorized) {
+      /* builds a newComment object with the information from the request */
       let newComment = {
         body: request.body.body,
         userId: request.user.id,
@@ -12,6 +14,7 @@ module.exports = {
       };
 
       commentQueries.createComment(newComment, (error) => {
+        /* redirect the user to the same place regardless of the outcome, so we populate an error if there is one and return to the referer view */
         if (error) {
           request.flash('erroror', error);
         }
@@ -23,6 +26,7 @@ module.exports = {
     }
   },
 
+  /* passes the request to the deleteComment method to determine if we should be deleted. */
   destroy: (request, response) => {
     commentQueries.deleteComment(request, (error) => {
       if (error) {
