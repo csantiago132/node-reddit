@@ -1,6 +1,6 @@
 {
   "name": "node-reddit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Reddit-like app for users to discuss and share content, built with Node and Express",
   "author": "Carlos Santiago",
   "license": "ISC",
@@ -25,7 +25,8 @@
     "prettier-js": "prettier --config  .prettierrc.json  --write *.js",
     "start-psql-server": "pg_ctl -D /usr/local/var/postgres start",
     "stop-psql-server": "pg_ctl -D /usr/local/var/postgres stop",
-    "heroku:deploy": "git push heroku master && heroku run sequelize db:migrate"
+    "heroku:deploy": "git push heroku master && heroku run sequelize db:migrate",
+    "heroku:app-status": "heroku logs --tail"
   },
   "husky": {
     "hooks": {
@@ -39,6 +40,7 @@
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
+    "dotenv": "^6.1.0",
     "body-parser": "1.18.2",
     "cross-env": "^5.2.0",
     "ejs": "^2.6.1",
@@ -46,6 +48,7 @@
     "express-flash": "0.0.2",
     "express-session": "1.15.6",
     "express-validator": "5.0.2",
+    "faker": "4.1.0",
     "passport": "0.4.0",
     "passport-local": "1.0.0",
     "pg": "7.4.1",
@@ -55,12 +58,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "dotenv": "^6.1.0",
     "eslint": "^5.6.1",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "faker": "4.1.0",
     "husky": "^1.1.0",
     "jasmine": "3.0.0",
     "lint-staged": "^7.3.0",
