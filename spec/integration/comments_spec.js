@@ -127,112 +127,9 @@ describe('routes : comments', () => {
     });
   });
 
-  // Admin user tries to delete member user's comment.
+  // member user tries to delete member user's comment.
   // This should be successful.
   describe('signed in admin user performing CRUD actions for Comment', () => {
-    beforeEach((done) => {
-      request.get(
-        {
-          url: 'http://localhost:5000/auth/fake',
-          form: {
-            role: 'admin',
-            userId: this.user.id,
-          },
-        },
-        (err, res, body) => {
-          done();
-        },
-      );
-    });
-
-    describe('POST /topics/:topicId/posts/:postId/comments/create', () => {
-      it('should create a new comment and redirect', (done) => {
-        const options = {
-          url: `${base}${this.topic.id}/posts/${this.post.id}/comments/create`,
-          form: {
-            body: 'This comment is amazing!',
-          },
-        };
-        request.post(options, (err, res, body) => {
-          Comment.findOne({ where: { body: 'This comment is amazing!' } })
-            .then((comment) => {
-              expect(comment).not.toBeNull();
-              expect(comment.body).toBe('This comment is amazing!');
-              expect(comment.id).not.toBeNull();
-              done();
-            })
-            .catch((err) => {
-              console.log(err);
-              done();
-            });
-        });
-      });
-    });
-
-    describe('POST /topics/:topicId/posts/:postId/comments/:id/destroy', () => {
-      it('should delete the comment with the associated ID', (done) => {
-        Comment.all().then((comments) => {
-          const commentCountBeforeDelete = comments.length;
-          expect(commentCountBeforeDelete).toBe(1);
-          request.post(
-            `${base}${this.topic.id}/posts/${this.post.id}/comments/${
-              this.comment.id
-            }/destroy`,
-            (err, res, body) => {
-              expect(res.statusCode).toBe(302);
-              Comment.all().then((comments) => {
-                expect(err).toBeNull();
-                expect(comments.length).toBe(commentCountBeforeDelete - 1);
-                done();
-              });
-            },
-          );
-        });
-      });
-
-      it('should not delete the comment with the associated ID of another member', (done) => {
-        User.create({
-          email: 'shouldNotDelete@email.com',
-          password: '123456',
-        }).then((user) => {
-          expect(user.email).toBe('shouldNotDelete@email.com');
-          expect(user.id).toBe(2);
-
-          request.get(
-            {
-              url: 'http://localhost:5000/auth/fake',
-              form: {
-                role: 'member',
-                userId: user.id,
-              },
-            },
-            (error, response, body) => {
-              done();
-            },
-          );
-
-          Comment.all().then((comments) => {
-            const commentCountBeforeDelete = comments.length;
-            expect(commentCountBeforeDelete).toBe(1);
-            request.post(
-              `${base}${this.topic.id}/posts/${this.post.id}/comments/${
-                this.comment.id
-              }/destroy`,
-              (error, response, body) => {
-                Comment.all().then((comments) => {
-                  expect(error).toBeNull();
-                  expect(comments.length).toBe(commentCountBeforeDelete);
-                  done();
-                });
-              },
-            );
-          });
-        });
-      });
-    });
-  });
-
-  describe('signed in user performing CRUD actions for Comment', () => {
     beforeEach((done) => {
       request.get(
         {
@@ -293,14 +190,12 @@ describe('routes : comments', () => {
         });
       });
 
-      // Member user tries to delete another member user's comment.
-      // This should not be successful.
       it('should not delete the comment with the associated ID of another member', (done) => {
         User.create({
-          email: 'shouldNotDelete1@email.com',
+          email: 'shouldNotDelete@email.com',
           password: '123456',
         }).then((user) => {
-          expect(user.email).toBe('shouldNotDelete1@email.com');
+          expect(user.email).toBe('shouldNotDelete@email.com');
           expect(user.id).toBe(2);
 
           request.get(

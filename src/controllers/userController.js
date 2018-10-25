@@ -46,4 +46,15 @@ module.exports = {
     request.flash('notice', "You've successfully signed out!");
     response.redirect('/');
   },
+
+  show: (request, response) => {
+    userQueries.getUser(request.params.id, (error, result) => {
+      if (error || result.user === undefined) {
+        request.flash('notice', 'No user found with that ID.');
+        response.redirect('/');
+      } else {
+        response.render('users/show', { ...result });
+      }
+    });
+  },
 };

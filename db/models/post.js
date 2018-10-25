@@ -51,6 +51,13 @@ module.exports = (sequelize, DataTypes) => {
         postId: post.id,
       });
     });
+    Post.afterCreate((post) => {
+      return models.Vote.create({
+        value: 1,
+        userId: post.userId,
+        postId: post.id,
+      });
+    });
   };
 
   Post.prototype.getPoints = () => {
@@ -82,5 +89,12 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
+  Post.addScope('lastFiveFor', (userId) => {
+    return {
+      where: { userId: userId },
+      limit: 5,
+      order: [['createdAt', 'DESC']],
+    };
+  });
   return Post;
 };
