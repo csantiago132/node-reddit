@@ -8,13 +8,7 @@ const normalizePort = (val) => {
   return false;
 };
 
-let customHost;
-
-process.env.NODE_ENV === 'test'
-  ? (customHost = process.env.PORT || '5000')
-  : (customHost = process.env.PORT || '4000');
-
-const port = normalizePort(customHost);
+const port = normalizePort(process.env.PORT || '5000');
 
 app.set('port', port);
 
