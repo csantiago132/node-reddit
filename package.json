@@ -24,7 +24,8 @@
     "prettier-json": "prettier --config  .prettierrc.json  --write *.json",
     "prettier-js": "prettier --config  .prettierrc.json  --write *.js",
     "start-psql-server": "pg_ctl -D /usr/local/var/postgres start",
-    "stop-psql-server": "pg_ctl -D /usr/local/var/postgres stop"
+    "stop-psql-server": "pg_ctl -D /usr/local/var/postgres stop",
+    "heroku:deploy": "git push heroku master && heroku run sequelize db:migrate"
   },
   "husky": {
     "hooks": {

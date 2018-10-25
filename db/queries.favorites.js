@@ -2,6 +2,7 @@ const Favorite = require('./models').Favorite;
 const Authorizer = require('../src/policies/favorite');
 
 module.exports = {
+  /* call create on the Favorite model with the id of the current user and the id of the post to create a favorite */
   createFavorite: (req, callback) => {
     return Favorite.create({
       postId: req.params.postId,
@@ -15,15 +16,16 @@ module.exports = {
       });
   },
 
-  deleteFavorite: (req, callback) => {
-    const id = req.params.id;
+  /* look to see if a favorite exists for the user and the post in question. If we find a favorite, we verify that the user is authorized to delete the favorite by passing both to the policy instance. */
+  deleteFavorite: (request, callback) => {
+    const id = request.params.id;
     return Favorite.findById(id)
       .then((favorite) => {
         if (!favorite) {
           return callback('Favorite not found');
         }
 
-        const authorized = new Authorizer(req.user, favorite).destroy();
+        const authorized = new Authorizer(request.user, favorite).destroy();
 
         if (authorized) {
           Favorite.destroy({ where: { id } })
@@ -34,12 +36,12 @@ module.exports = {
               callback(err);
             });
         } else {
-          req.flash('notice', 'You are not authorized to do that.');
+          request.flash('notice', 'You are not authorized to do that.');
           callback(401);
         }
       })
-      .catch((err) => {
-        callback(err);
+      .catch((error) => {
+        callback(error);
       });
   },
 };
