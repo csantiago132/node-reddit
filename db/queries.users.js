@@ -33,8 +33,31 @@ module.exports = {
             Comment.scope({ method: ['lastFiveFor', id] })
               .all()
               .then((comments) => {
-                result['comments'] = comments;
-                callback(null, result);
+                result['comments'] = comments; // Store the result in the object
+                // Execute the scope on User to get tall favorites made by the user.
+                User.scope({ method: ['allFavoritedPosts', id] })
+                  .all()
+                  .then((favorites) => {
+                    let userFavorites = JSON.parse(JSON.stringify(favorites));
+                    let favoritePostsId = [];
+                    userFavorites[0].favorites.forEach((favorite) => {
+                      favoritePostsId.push(favorite.postId);
+                    });
+                    var allFavorites = [];
+                    Post.findAll().then((allPosts) => {
+                      allPosts.forEach((thisPost) => {
+                        if (favoritePostsId.includes(thisPost.id)) {
+                          allFavorites.push({
+                            id: thisPost.id,
+                            title: thisPost.title,
+                            topicId: thisPost.topicId,
+                          });
+                        }
+                      });
+                      result['allFavorites'] = allFavorites;
+                      callback(null, result);
+                    });
+                  });
               })
               .catch((error) => {
                 callback(error);

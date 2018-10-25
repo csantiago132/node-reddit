@@ -34,6 +34,23 @@
       </ul>
       <hr>
 
+      <hr>
+      
+       <h2>Favorited Posts</h2>
+       <ul class="list-unstyled">
+        <% if (allFavorites) { %>
+          <% allFavorites.forEach((post) => { %>
+            <li>
+              <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>">
+                <%= post.title %>
+              </a>
+            </li>
+          <% }) %>
+        <% } %>
+      </ul>
+      
+      <hr>
+
       <h2> Latest Comments</h2>
 
       <ul class="list-unstyled">
