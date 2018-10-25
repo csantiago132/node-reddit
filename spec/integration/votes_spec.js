@@ -84,6 +84,7 @@ describe('routes : votes', () => {
             },
           })
             .then((vote) => {
+              console.log(vote.user.id);
               expect(vote).toBeNull();
               done();
             })
