@@ -4,7 +4,7 @@
 [![CircleCI](https://circleci.com/gh/csantiago132/node-reddit.svg?style=svg)](https://circleci.com/gh/csantiago132/node-reddit)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-<p align="center"><img src="preview.png" alt="node-address-book preview"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/csantiago132/node-reddit/develop/preview.png" alt="node-address-book preview"/></p>
 
 A Reddit-like app for users to discuss and share content, built with Node and
 Express using Sequelize on a PostgreSQL database.
